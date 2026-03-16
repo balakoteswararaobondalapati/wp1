@@ -253,8 +253,8 @@ def startup_event() -> None:
         ensure_blood_bank_constraints(db)
         if settings.blood_bank_sync_on_startup:
             sync_blood_bank_from_profiles(db)
-        if settings.seed_demo_data:
-            seed_defaults(db)
+        # Always ensure at least one admin exists in production DBs.
+        seed_defaults(db)
         ensure_role_profiles(db)
     finally:
         db.close()
