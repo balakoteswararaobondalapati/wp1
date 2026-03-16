@@ -35,6 +35,15 @@ const API_BASE_URL = resolveApiBase();
 
 const roleToApiRole = (role: string) => (role === 'lecturer' ? 'faculty' : role);
 const apiRoleToUiRole = (role: string) => (role === 'faculty' ? 'lecturer' : role);
+const ACCESS_TOKEN_KEY = 'access_token';
+
+const getAccessToken = () => {
+  try {
+    return appStorage.getItem(ACCESS_TOKEN_KEY) || '';
+  } catch {
+    return '';
+  }
+};
 
 class ApiError extends Error {
   status: number;
@@ -66,6 +75,10 @@ const request = async (path: string, options: RequestInit = {}, requireAuth = fa
     'Content-Type': 'application/json',
     ...(options.headers as Record<string, string> | undefined),
   };
+  const token = getAccessToken();
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
 
   const makeRequest = async (baseUrl: string) =>
     fetch(`${baseUrl}${path}`, {
@@ -107,6 +120,9 @@ const request = async (path: string, options: RequestInit = {}, requireAuth = fa
       },
       false,
     );
+    if (data?.access_token) {
+      appStorage.setItem(ACCESS_TOKEN_KEY, data.access_token);
+    }
 
     const user = {
       ...data.user,
@@ -167,6 +183,7 @@ const request = async (path: string, options: RequestInit = {}, requireAuth = fa
   logout() {
     request('/auth/logout', { method: 'POST' }, false).catch(() => {});
     appStorage.removeItem('current_user');
+    appStorage.removeItem(ACCESS_TOKEN_KEY);
   },
 };
 
