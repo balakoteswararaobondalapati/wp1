@@ -28,7 +28,8 @@ def root() -> dict[str, str]:
 
 
 def seed_defaults(db: Session) -> None:
-    if db.query(User).count() > 0:
+    admin_exists = db.query(User).filter(User.role == Role.admin).first()
+    if admin_exists:
         return
 
     admin = User(
