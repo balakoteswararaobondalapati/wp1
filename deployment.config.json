@@ -1,0 +1,12 @@
+{
+  "name": "Educational Institution App",
+  "version": "1.0.0",
+  "supabase": {
+    "enabled": false,
+    "skipDeployment": true,
+    "skipEdgeFunctions": true
+  },
+  "build": {
+    "skipSupabaseDeployment": true
+  }
+}

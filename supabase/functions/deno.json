@@ -1,0 +1,8 @@
+{
+  "tasks": {},
+  "imports": {},
+  "exclude": [
+    "server/",
+    "server/**/*"
+  ]
+}

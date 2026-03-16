@@ -1,0 +1,24 @@
+{
+  "supabase": {
+    "enabled": false,
+    "deployEdgeFunctions": false,
+    "skipDeployment": true,
+    "disabled": true,
+    "preventDeployment": true
+  },
+  "deployment": {
+    "skipSupabase": true,
+    "skipEdgeFunctions": true,
+    "disableSupabase": true
+  },
+  "integrations": {
+    "supabase": {
+      "enabled": false,
+      "active": false
+    }
+  },
+  "features": {
+    "localStorageOnly": true,
+    "noBackend": true
+  }
+}

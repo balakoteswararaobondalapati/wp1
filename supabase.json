@@ -1,0 +1,19 @@
+{
+  "enabled": false,
+  "functions": {
+    "enabled": false,
+    "deploy": false
+  },
+  "edge_functions": {
+    "enabled": false,
+    "deploy": false
+  },
+  "deployment": {
+    "skip": true,
+    "disabled": true,
+    "prevent": true
+  },
+  "integrations": {
+    "enabled": false
+  }
+}

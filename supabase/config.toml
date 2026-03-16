@@ -1,0 +1,21 @@
+# Supabase Configuration - ALL FEATURES DISABLED
+# This app uses localStorage only - no backend required
+
+[api]
+enabled = false
+
+[db]
+enabled = false
+
+[functions]
+enabled = false
+
+[edge_functions]
+enabled = false
+
+[edge_functions.server]
+enabled = false
+verify_jwt = false
+
+[deployment]
+skip = true

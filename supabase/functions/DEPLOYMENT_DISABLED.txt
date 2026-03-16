@@ -1,0 +1,23 @@
+═══════════════════════════════════════════════════════════
+  SUPABASE EDGE FUNCTIONS DEPLOYMENT COMPLETELY DISABLED
+═══════════════════════════════════════════════════════════
+
+This application does NOT use Supabase or any backend services.
+
+All data operations use browser localStorage exclusively.
+
+DO NOT ATTEMPT TO DEPLOY EDGE FUNCTIONS.
+
+The presence of this file indicates that:
+✗ No Supabase deployment should occur
+✗ No edge functions should be deployed
+✗ No backend services are required
+
+✓ Application uses 100% localStorage
+✓ All features work without backend
+✓ No database connection needed
+
+If you see deployment errors, they can be safely ignored.
+The app functions perfectly without Supabase.
+
+═══════════════════════════════════════════════════════════
