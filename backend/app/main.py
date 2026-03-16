@@ -204,6 +204,34 @@ def ensure_blood_bank_constraints(db: Session) -> None:
     db.execute(text("CREATE UNIQUE INDEX IF NOT EXISTS blood_bank_contact_key ON blood_bank (contact)"))
     db.commit()
 
+def ensure_faculty_status_table(db: Session) -> None:
+    db.execute(
+        text(
+            """
+            CREATE TABLE IF NOT EXISTS faculty_date_status (
+                id SERIAL PRIMARY KEY,
+                faculty_id INTEGER NOT NULL REFERENCES faculty(id) ON DELETE CASCADE,
+                date_value DATE NOT NULL,
+                status VARCHAR(32) NOT NULL,
+                reason TEXT,
+                set_by INTEGER REFERENCES users(id) ON DELETE SET NULL,
+                created_at TIMESTAMPTZ DEFAULT NOW()
+            )
+            """
+        )
+    )
+    db.execute(
+        text(
+            "CREATE INDEX IF NOT EXISTS idx_faculty_date_status_date ON faculty_date_status(date_value)"
+        )
+    )
+    db.execute(
+        text(
+            "CREATE UNIQUE INDEX IF NOT EXISTS idx_faculty_date_status_unique ON faculty_date_status(faculty_id, date_value)"
+        )
+    )
+    db.commit()
+
 def sync_blood_bank_from_profiles(db: Session) -> None:
     db.execute(
         text(
@@ -251,6 +279,7 @@ def startup_event() -> None:
         ensure_faculty_columns(db)
         ensure_student_columns(db)
         ensure_blood_bank_constraints(db)
+        ensure_faculty_status_table(db)
         if settings.blood_bank_sync_on_startup:
             sync_blood_bank_from_profiles(db)
         # Always ensure at least one admin exists in production DBs.
